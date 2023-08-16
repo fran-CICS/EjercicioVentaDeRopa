@@ -15,29 +15,31 @@ class PrendaTest {
 
     @BeforeEach
     void setUp(){
-        unaPrenda = new Prenda();
+        unaPrenda = new Prenda("Remera negra", new BigDecimal(2500), new Nueva());
     }
 
     @Test
     void testPrecioPrendaNueva() {
         assertEquals(
-                /* Deberia ser el precio de una prenda nueva */ BigDecimal.ZERO,
+                new BigDecimal(2500),
                 unaPrenda.calcularPrecio()
         );
     }
 
     @Test
     void testPrecioPrendaEnPromo() {
+        unaPrenda.setEstadoPrenda(new Promocion(new BigDecimal(300)));
         assertEquals(
-                /* Deberia ser el precio de una prenda en promo */ BigDecimal.ZERO,
+                new BigDecimal(2200),
                 unaPrenda.calcularPrecio()
         );
     }
 
     @Test
     void testPrecioPrendaEnLiqui() {
+        unaPrenda.setEstadoPrenda(new Liquidacion());
         assertEquals(
-                /* Deberia ser el precio de una prenda en liquidacion */ BigDecimal.ZERO,
+                new BigDecimal(1250),
                 unaPrenda.calcularPrecio()
         );
     }
